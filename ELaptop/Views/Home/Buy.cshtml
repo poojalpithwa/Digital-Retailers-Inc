@@ -1,0 +1,54 @@
+﻿@model ELaptop.Models.Product
+
+@{
+    ViewBag.Title = Model.Product_name;
+}
+
+<style>
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .flex-row {
+        flex-direction: row;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+</style>
+
+<h5 class="display-5" style="margin-top: 2em">@Html.ActionLink("Home", "Index") > Showing Laptop: <b>@Model.Product_name</b></h5>
+
+<div class="container">
+    <div class="row d-flex flex-center">
+        <div class="col-md-6 col-12 flex-center">
+            <img src="@Url.Content(Model.ImagePath)" style="width: 75%; height: 100%"/>
+        </div>
+        <div class="col-md-6 col-12">
+            <h3><b>@Model.Product_name</b></h3>
+            <p><span class="text-muted">Category:</span> @Model.Category</p>
+            <hr />
+            <h5><b>Product specification</b></h5>
+            <ul>
+                <li>Central Processing Unit (CPU): <b>@Model.CPU</b></li>
+                <li>Random Access Memory (RAM): <b>@Model.RAM GigaBytes (GBs)</b></li>
+                <li>Hard Disk Storage (HDD): <b>@Model.Storage GigaBytes (GBs)</b></li>
+                <li><h4>Price: <span class="badge text-bg-primary"><b>₹ @Model.Price</b></span></h4></li>
+            </ul>
+            <div style="margin-top: 2em; margin-left: 2em">
+                @Html.ActionLink("Buy now", "Order", new { id = Model.Product_id }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

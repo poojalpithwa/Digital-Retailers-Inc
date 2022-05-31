@@ -1,0 +1,98 @@
+﻿@model ELaptop.Models.Order
+
+@{
+    ViewBag.Title = "Ordering Laptop: " + Model.Product_Name;
+}
+
+<style>
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .flex-row {
+        flex-direction: row;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+
+</style>
+
+<h5 class="display-5" style="margin-top: 2em">
+    @Html.ActionLink("Home", "Index") > @Html.ActionLink("Product Specification", "Buy", new { id = ViewBag.ProductID }) > Ordering Laptop: <b> @ViewBag.ProductName</b>
+</h5>
+
+<div class="container">
+    <div class="row d-flex justify-content-center" style="margin-top: 2em;">
+        <div class="col-md-6 col-xs-12 flex-center" style="flex-direction: column; align-items: flex-start">
+            <h5><b>Ordering Laptop:</b></h5><br />
+            <div class="d-flex flex-center">
+                <img src="@Url.Content(ViewBag.ImagePath)" width="100" />
+                <div class="d-flex flex-column" style="margin-left: 2em">
+                    <h5>Product Name: <b>@Model.Product_Name</b></h5>
+                    <h5>Price: <b>₹ @Model.Price</b></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <h3><b>Enter Details</b></h3>
+            @*<p><span class="text-muted">Category:</span> @Model.Category</p>*@
+            <hr />
+            @using (Html.BeginForm("Order", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Name</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Address</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Cusomer_Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Cusomer_Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Phone</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer_Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Place Order" class="btn btn-primary" />
+                </div>
+            </div>
+
+            <input type="hidden" name="Product_Name" value="@Model.Product_Name" />
+            <input type="hidden" name="Price" value="@Model.Price" />
+        </div>
+            }
+            @*<div style="margin-top: 2em; margin-left: 2em">
+                @Html.ActionLink("Buy now", "Order", new
+                {
+                    id = ViewBag.ProducID
+                }, new { @class = "btn btn-primary" })
+            </div>*@
+        </div>
+    </div>
+</div>
+

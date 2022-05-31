@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model IEnumerable<ELaptop.Models.Product>
+
+<style>
+    .card-container {
+        border: 1px solid #00000010;
+        padding: 1em;
+        text-align: center;
+        background-color:lightgray;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1>Digital Retailers Inc</h1>
+    <p class="lead">Be it setting up a workspace at home, attending online lectures, or being a professional gamer; laptops make everything easier. These gadgets offer the advantage of portability, longer battery life, and convenient size. Order the ideal device from us without stepping out and get doorstep delivery.</p>
+</div>
+
+<h3>Laptops to choose from: </h3>
+<hr />
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3" style="margin: 1em 0">
+                <div class="card card-container" style="width: 24rem;">
+                    <img class="card-img-top" src="@Url.Content(item.ImagePath)" alt="Laptop Image" width="150" height="100">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>@item.Product_name</b></h5>
+                        <h5 class="card-title text-muted"><b>@item.Category</b></h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-left">CPU: @item.CPU</li>
+                        <li class="list-group-item text-left">RAM: @item.RAM GB</li>
+                        <li class="list-group-item text-left">Storage: @item.Storage GB</li>
+                    </ul>
+                    <div class="card-body">
+                        <h5 class="card-title"><b>Price: ₹@item.Price</b></h5>
+                        @*<a href="#" class="btn btn-primary"></a>*@
+                        @Html.ActionLink("Buy now", "Buy", new { id = item.Product_id }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

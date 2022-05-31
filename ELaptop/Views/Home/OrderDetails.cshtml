@@ -1,0 +1,45 @@
+﻿@model ELaptop.Models.Order
+
+@{
+    ViewBag.Title = "OrderDetails";
+}
+
+<style>
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .flex-row {
+        flex-direction: row;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+</style>
+
+<h2>Order successfully placed!</h2>
+<hr />
+<div class="container d-flex flex-center flex-column text-left">
+    <h3 class="text-primary">Order Summary</h3>
+    <h5>Product Name: <b>@Model.Product_Name</b></h5>
+    <h5>Product Price: <b>@Model.Price</b></h5>
+    <h5>Customer Name: <b>@Model.Customer_Name</b></h5>
+    <h5>Customer Address: <b>@Model.Cusomer_Address</b></h5>
+    <h5>Customer Phone Number: <b>@Model.Customer_Phone</b></h5>
+    <h5>Billing Time: <b>@Model.Created</b></h5>
+</div>
+
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>
